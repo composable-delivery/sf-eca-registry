@@ -1,0 +1,29 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: Data360ApiIntegration
+  label: Data 360 API Integration
+  description: Used by a server-side integration to work with Data 360 (Data Cloud).
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: jwt-bearer
+  callbackUrls:
+    - https://login.salesforce.com/services/oauth2/success
+  scopes:
+    - Api
+    - RefreshToken
+    - CDPIngest
+    - CDPProfile
+    - CDPQuery
+  certificate:
+    autoGenerate: true
+  isConsumerSecretOptional: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: SpecificLifetime
+  refreshTokenValidityPeriod: 30
+  refreshTokenValidityUnit: Days

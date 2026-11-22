@@ -1,0 +1,26 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: CliWebLogin
+  label: CLI Web Login
+  description: Used by the Salesforce CLI command sf org login web.
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: web-server
+  callbackUrls:
+    - http://localhost:8080/OauthRedirect
+  scopes:
+    - Api
+    - Web
+    - RefreshToken
+  isPkceRequired: true
+  isRefreshTokenRotationEnabled: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: SpecificLifetime
+  refreshTokenValidityPeriod: 30
+  refreshTokenValidityUnit: Days

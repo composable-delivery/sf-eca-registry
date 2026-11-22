@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "tableau-server"
+  name: "Tableau Server Custom OAuth Client"
+  version: "0.0.1"
+  platform:
+    name: "Tableau Server"
+    documentationUrl: "https://help.tableau.com/current/server/en-us/config_oauth_sfdc.htm"
+  category: "Data & Analytics"
+  tags: ["tableau", "analytics"]
+  summary: "For a Tableau Server that connects to Salesforce with an OAuth client of your own."
+  description: "Tableau Server uses a Tableau-managed app by default. Use this template only when you set up your own client; its credentials and redirect address are then entered on the server with 'tsm configuration set'."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "BiServerLogin"
+    required: true
+    helpText: "API name for the External Client App in your org, for example BiServerLogin."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+  - id: "TABLEAU_SERVER_FQDN"
+    label: "Tableau Server Host Name"
+    type: "string"
+    required: true
+    helpText: "Fully qualified domain name of your Tableau Server, without https://, for example tableau.example.com."
+    validationRegex: "^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?$"
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "BI Server Login"
+    description: "Used by Tableau Server to connect to Salesforce."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "web-server"
+    callbackUrls:
+      - "https://${TABLEAU_SERVER_FQDN}/auth/add_oauth_token"
+    scopes:
+      - "OpenID"
+      - "Profile"
+      - "Email"
+      - "Address"
+      - "Phone"
+      - "Api"
+      - "RefreshToken"

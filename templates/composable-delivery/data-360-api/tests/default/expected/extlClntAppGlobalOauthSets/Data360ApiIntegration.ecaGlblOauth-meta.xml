@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtlClntAppGlobalOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <callbackUrl>https://login.salesforce.com/services/oauth2/success</callbackUrl>
+    <certificate>-----BEGIN CERTIFICATE-----
+MIIDejCCAmKgAwIBAgIUUs30ynNbdn9av3BntYMEAsS2TxYwDQYJKoZIhvcNAQEL
+BQAwXDEpMCcGA1UEAwwgZWNhLWNvbmZvcm1hbmNlLXRlc3QuZXhhbXBsZS5jb20x
+IjAgBgNVBAoMGUVDQSBDb25mb3JtYW5jZSBUZXN0IE9ubHkxCzAJBgNVBAYTAlVT
+MCAXDTI2MTExMjIwMjAwOFoYDzIxMjYxMDE5MjAyMDA4WjBcMSkwJwYDVQQDDCBl
+Y2EtY29uZm9ybWFuY2UtdGVzdC5leGFtcGxlLmNvbTEiMCAGA1UECgwZRUNBIENv
+bmZvcm1hbmNlIFRlc3QgT25seTELMAkGA1UEBhMCVVMwggEiMA0GCSqGSIb3DQEB
+AQUAA4IBDwAwggEKAoIBAQCN+z3Vba2o894QWBKSaYp7y2T29b2owMrKFi/hvmct
+wruObQFk16Tb6502BTLIpAnm0o0l8WBcqALOhDqFPX7SCZuxVlFKxcpCcTnlEaqc
+vEkuNAlLhXRawxORbIPpPsxbaH5+Z+Z6wDMrLpktoIuhPIA/8YsI6ut7yHasii5N
+H0sdZgxWIJT4W7NgQEib6DCz760D9zV3s+PSnvWgQ+K3L0rd4uUBJls1u8CUrksz
+wOipdXFn8TihOBLzHkgEYrn/Pp4OKuon4eKMaAzBg1HVbNttsCe1RsteB/H3EfRe
+IcFnw715gI0pUwARNl+DrotBUrKRelZ2I3FIZMagZ4FJAgMBAAGjMjAwMB0GA1Ud
+DgQWBBQObUUVAUmNz7ZrezBivVEvxlYofzAPBgNVHRMBAf8EBTADAQH/MA0GCSqG
+SIb3DQEBCwUAA4IBAQBK3U9RR+EZWY4cxvxxrEZLlOLr/xSwWL8RuieGSI8m5ZUc
+tshI0wmoyKUJbVG0y7gaZUM7SRlRs1N5XML6ZyJDqOoTKMxmePzFsunbhjSLeUYs
+COU+4bw/gb5hPPPvPLOrdal6KvCQ0Jqk8hJWol68N0L6zpE0F64Z445/A8irMvjJ
+NQKQ9Rts8D090967cFiDJZpwJCjG48pIS13GJS40y93dSLecXtdPyTW0v255D55s
+CXSIFNwsjRhSYXeCJZ8frhhslNJH5xmtPO6mEVUyXmJuJgjb9qkkTAr8uUU70gBe
+32YLo0Gy1SdgRBXqzyMAoKujwHsW2eLwl38HRtBK
+-----END CERTIFICATE-----</certificate>
+    <externalClientApplication>Data360ApiIntegration</externalClientApplication>
+    <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
+    <isCodeCredFlowEnabled>false</isCodeCredFlowEnabled>
+    <isCodeCredPostOnly>false</isCodeCredPostOnly>
+    <isConsumerSecretOptional>true</isConsumerSecretOptional>
+    <isDeviceFlowEnabled>false</isDeviceFlowEnabled>
+    <isIntrospectAllTokens>false</isIntrospectAllTokens>
+    <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+    <isPkceRequired>true</isPkceRequired>
+    <isRefreshTokenRotationEnabled>true</isRefreshTokenRotationEnabled>
+    <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+    <isSecretRequiredForTokenExchange>false</isSecretRequiredForTokenExchange>
+    <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
+    <label>Data 360 API Integration Global OAuth</label>
+    <shouldRotateConsumerKey>false</shouldRotateConsumerKey>
+    <shouldRotateConsumerSecret>false</shouldRotateConsumerSecret>
+</ExtlClntAppGlobalOauthSettings>

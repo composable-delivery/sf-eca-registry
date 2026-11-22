@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "data-360-api"
+  name: "Data 360 (Data Cloud) API"
+  version: "0.0.1"
+  platform:
+    name: "Data 360 (Data Cloud) APIs"
+    documentationUrl: "https://developer.salesforce.com/docs/data/data-cloud-dev/guide/dc-quick-start.html"
+  category: "Data & Analytics"
+  tags: ["data-360", "data-cloud", "ingestion", "query"]
+  summary: "For a server-side integration that sends data to, or queries, Data 360 (Data Cloud) through its APIs."
+  description: "Connects a backend job or service to the Data 360 Ingestion, Profile and Query APIs. It signs in with a JWT, so no person has to be present."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "Data360ApiIntegration"
+    required: true
+    helpText: "API name for the External Client App in your org, for example Data360ApiIntegration."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Data 360 API Integration"
+    description: "Used by a server-side integration to work with Data 360 (Data Cloud)."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "jwt-bearer"
+    callbackUrls:
+      - "https://login.salesforce.com/services/oauth2/success"
+    scopes:
+      - "Api"
+      - "RefreshToken"
+      - "CDPIngest"
+      - "CDPProfile"
+      - "CDPQuery"
+    certificate:
+      autoGenerate: true

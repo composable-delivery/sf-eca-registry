@@ -1,0 +1,26 @@
+name: Report a problem with a template
+description: Something in a published template is wrong or unsafe.
+title: "Report: "
+labels: ["template-report"]
+body:
+  - type: input
+    id: template
+    attributes:
+      label: Template
+      description: The reference as `sf eca template list` prints it, for example `@owner/repo/publisher/id`.
+    validations:
+      required: true
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      description: The output of `sf plugins`.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what the plugin showed. Leave out secrets and org data.
+    validations:
+      required: true

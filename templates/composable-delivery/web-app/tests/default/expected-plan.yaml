@@ -1,0 +1,25 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: WebApp
+  label: Web Application
+  description: Used by a web application to sign users in with Salesforce.
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: web-server
+  callbackUrls:
+    - https://app.example.com/callback
+  scopes:
+    - Api
+    - RefreshToken
+  isPkceRequired: true
+  isRefreshTokenRotationEnabled: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: SpecificLifetime
+  refreshTokenValidityPeriod: 30
+  refreshTokenValidityUnit: Days

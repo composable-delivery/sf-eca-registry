@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalClientApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>admin@example.com</contactEmail>
+    <description>Used by another Salesforce org to sign in to this one through an Authentication Provider.</description>
+    <distributionState>Local</distributionState>
+    <isProtected>false</isProtected>
+    <label>Auth Provider Login</label>
+</ExternalClientApplication>

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "web-app"
+  name: "Web Server Flow Application"
+  version: "0.0.1"
+  platform:
+    name: "OAuth 2.0 web server flow client"
+    documentationUrl: "https://help.salesforce.com/s/articleView?id=xcloud.remoteaccess_oauth_web_server_flow.htm"
+  category: "Custom"
+  tags: ["web", "web-server"]
+  summary: "For a web application with a server-side back end that signs users in to Salesforce."
+  description: "Use this template for your own web application whose server code calls Salesforce for the people who sign in to it. Adapt the plan it generates with 'sf eca plan generate' for anything more specific."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "WebApp"
+    required: true
+    helpText: "API name for the External Client App in your org, for example PortalWebApp."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+  - id: "CALLBACK_URL"
+    label: "Callback URL"
+    type: "string"
+    required: true
+    helpText: "Address on your web application that receives the sign-in response from Salesforce, for example https://app.example.com/oauth/callback. An http://localhost address can be used while developing."
+    validationRegex: "^https?://[^\\s]+$"
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Web Application"
+    description: "Used by a web application to sign users in with Salesforce."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "web-server"
+    callbackUrls:
+      - "${CALLBACK_URL}"
+    scopes:
+      - "Api"
+      - "RefreshToken"

@@ -1,0 +1,28 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: SalesforceHostedMcp
+  label: 'Salesforce MCP: This plugin'
+  description: Used by MCP clients to connect to the Hosted MCP servers run by Salesforce.
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: web-server
+  callbackUrls:
+    - http://localhost:1717/OauthRedirect
+  scopes:
+    - MCP
+    - RefreshToken
+  isConsumerSecretOptional: true
+  isNamedUserJwtEnabled: true
+  isSecretRequiredForRefreshToken: false
+  isPkceRequired: true
+  isRefreshTokenRotationEnabled: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: SpecificLifetime
+  refreshTokenValidityPeriod: 30
+  refreshTokenValidityUnit: Days

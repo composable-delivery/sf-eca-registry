@@ -1,0 +1,7 @@
+# Registry maintainers own everything; a publisher's submitters are listed in its .publisher.yaml.
+*                                          @jlantz
+templates/*/.publisher.yaml                @jlantz
+/maintainers.yaml                          @jlantz
+/registry.yaml                             @jlantz
+/.github/                                  @jlantz
+/templates/composable-delivery/            @jlantz

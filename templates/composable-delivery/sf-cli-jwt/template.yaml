@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "sf-cli-jwt"
+  name: "Salesforce CLI JWT Login"
+  version: "0.0.1"
+  platform:
+    name: "Salesforce CLI (sf org login jwt)"
+    documentationUrl: "https://developer.salesforce.com/docs/platform/sfdx-dev/guide/sfdx-dev-auth-jwt-flow.html"
+  category: "CI/CD & DevOps"
+  tags: ["sf-cli", "jwt", "ci"]
+  summary: "For signing in to an org with 'sf org login jwt', for example from a CI job, with no person present."
+  description: "Use this template for any job or machine that runs Salesforce CLI commands against an org with 'sf org login jwt'. That command requires an External Client App of your own."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "CliJwtLogin"
+    required: true
+    helpText: "API name for the External Client App in your org, for example CliJwtLogin."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "CLI JWT Login"
+    description: "Used by the Salesforce CLI command sf org login jwt."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "jwt-bearer"
+    callbackUrls:
+      - "http://localhost:1717/OauthRedirect"
+    scopes:
+      - "Api"
+      - "Web"
+      - "RefreshToken"
+    certificate:
+      autoGenerate: true

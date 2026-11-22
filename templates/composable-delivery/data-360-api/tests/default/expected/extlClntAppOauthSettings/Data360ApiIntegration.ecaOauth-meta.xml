@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtlClntAppOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <commaSeparatedOauthScopes>Api, RefreshToken, CDPIngest, CDPProfile, CDPQuery</commaSeparatedOauthScopes>
+    <externalClientApplication>Data360ApiIntegration</externalClientApplication>
+    <label>Data 360 API Integration OAuth Settings</label>
+</ExtlClntAppOauthSettings>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Data360ApiIntegration</members>
+        <name>ExternalClientApplication</name>
+    </types>
+    <types>
+        <members>Data360ApiIntegration_defaultPolicy</members>
+        <name>ExtlClntAppConfigurablePolicies</name>
+    </types>
+    <types>
+        <members>Data360ApiIntegration</members>
+        <name>ExtlClntAppGlobalOauthSettings</name>
+    </types>
+    <types>
+        <members>Data360ApiIntegration</members>
+        <name>ExtlClntAppOauthSettings</name>
+    </types>
+    <types>
+        <members>Data360ApiIntegration_defaultPolicy</members>
+        <name>ExtlClntAppOauthConfigurablePolicies</name>
+    </types>
+    <version>68.0</version>
+</Package>

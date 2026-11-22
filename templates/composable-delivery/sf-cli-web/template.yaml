@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "sf-cli-web"
+  name: "Salesforce CLI Web Login with Your Own App"
+  version: "0.0.1"
+  platform:
+    name: "Salesforce CLI (sf org login web)"
+    documentationUrl: "https://developer.salesforce.com/docs/platform/sfdx-dev/guide/sfdx-dev-auth-eca.html"
+  category: "Developer Tools"
+  tags: ["sf-cli", "developer"]
+  summary: "For orgs that do not use Salesforce's default app for 'sf org login web'."
+  description: "Salesforce provides a default app for 'sf org login web', so this template is optional. Use it when your org signs in with an app of its own, and pass that app's client id to the command with --client-id."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "CliWebLogin"
+    required: true
+    helpText: "API name for the External Client App in your org, for example CliWebLogin."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+  - id: "OAUTH_LOCAL_PORT"
+    label: "Local Callback Port"
+    type: "integer"
+    default: 1717
+    helpText: "Port the Salesforce CLI listens on for the sign-in response: the oauthLocalPort value in sfdx-project.json, or 1717 when that is not set."
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "CLI Web Login"
+    description: "Used by the Salesforce CLI command sf org login web."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "web-server"
+    callbackUrls:
+      - "http://localhost:${OAUTH_LOCAL_PORT}/OauthRedirect"
+    scopes:
+      - "Api"
+      - "Web"
+      - "RefreshToken"

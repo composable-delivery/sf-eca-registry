@@ -1,0 +1,6 @@
+schema: 1
+name: "@composable-delivery/sf-eca-registry"
+description: The official registry of External Client App templates for the sf eca plugin.
+kit:
+  repository: composable-delivery/sf-eca-registry-kit
+  commit: "07ef599ec64c13460f5f8cc856010fbf14395ecd"

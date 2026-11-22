@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "salesforce-auth-provider"
+  name: "Salesforce Authentication Provider"
+  version: "0.0.1"
+  platform:
+    name: "Salesforce Authentication Provider"
+    documentationUrl: "https://help.salesforce.com/s/articleView?id=xcloud.sso_provider_sfdc.htm"
+  category: "iPaaS & Automation"
+  tags: ["auth-provider", "cross-org"]
+  summary: "For the org that another Salesforce org signs in to through a Salesforce Authentication Provider."
+  description: "Deploy this app in the identity provider org. The other org's Authentication Provider is then set up with this app's credentials, and shows the callback address this app needs."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "AuthProviderLogin"
+    required: true
+    helpText: "API name for the External Client App in the identity provider org, for example AuthProviderLogin."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+  - id: "CALLBACK_URL"
+    label: "Callback URL"
+    type: "string"
+    required: true
+    helpText: "The Callback URL the Authentication Provider shows, copied as it is. The provider needs this app's consumer key first, so deploy once with the address you expect and deploy again with the one it shows."
+    validationRegex: "^https://[^\\s]+$"
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Auth Provider Login"
+    description: "Used by another Salesforce org to sign in to this one through an Authentication Provider."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "web-server"
+    callbackUrls:
+      - "${CALLBACK_URL}"
+    scopes:
+      - "Api"
+      - "RefreshToken"

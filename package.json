@@ -1,0 +1,9 @@
+{
+  "name": "@composable-delivery/sf-eca-registry-bundle",
+  "version": "0.0.1",
+  "description": "Release bundle of the official sf eca template registry.",
+  "license": "BSD-3-Clause",
+  "files": ["dist"],
+  "publishConfig": { "registry": "https://npm.pkg.github.com" },
+  "repository": { "type": "git", "url": "git+https://github.com/composable-delivery/sf-eca-registry.git" }
+}

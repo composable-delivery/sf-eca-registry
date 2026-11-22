@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "hosted-mcp"
+  name: "Salesforce Hosted MCP Server Client"
+  version: "0.0.1"
+  platform:
+    name: "Salesforce Hosted MCP Servers"
+    documentationUrl: "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/create-external-client-app.html"
+  category: "AI & Agents"
+  tags: ["mcp", "hosted-mcp", "ai"]
+  summary: "For connecting an MCP client, such as Claude, ChatGPT or Cursor, to a Salesforce hosted MCP server."
+  description: "Use this template for one MCP client, or for several that share an app. You choose the clients when you deploy, and each client's callback address comes from the catalogue that 'sf eca mcp clients' prints."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "SalesforceHostedMcp"
+    required: true
+    helpText: "API name for the External Client App in your org. When you do not give one, it is named after the client you choose, for example SalesforceMcpClaude."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+  - id: "MCP_CLIENTS"
+    label: "MCP Clients"
+    type: "mcp-clients"
+    default: "sf-eca"
+    required: true
+    helpText: "The clients that sign in through this app, separated by commas, for example claude or claude,cursor. A client that needs a port is written claude-code:8123, and one that needs its own address is written chatgpt=<address>. See the choices with: sf eca mcp clients"
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Salesforce MCP: ${MCP_CLIENTS_NAMES}"
+    description: "Used by MCP clients to connect to the Hosted MCP servers run by Salesforce."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "web-server"
+    callbackUrls:
+      - "${MCP_CLIENTS}"
+    scopes:
+      - "MCP"
+      - "RefreshToken"
+    isConsumerSecretOptional: true
+    isNamedUserJwtEnabled: true
+
+references:
+  - setting: "oauth.isNamedUserJwtEnabled"
+    url: "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/create-external-client-app.html"
+  - setting: "oauth.isConsumerSecretOptional"
+    url: "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/claude.html"

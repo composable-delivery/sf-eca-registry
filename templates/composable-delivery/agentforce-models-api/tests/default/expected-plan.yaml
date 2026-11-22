@@ -1,0 +1,21 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: ModelsApiClient
+  label: Models API Client
+  description: Used by a server-side program to call the Agentforce Models API.
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: client-credentials
+  scopes:
+    - Api
+    - SFApiPlatform
+  isNamedUserJwtEnabled: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: Zero
+  clientCredentialsFlowUser: integration.user@example.com

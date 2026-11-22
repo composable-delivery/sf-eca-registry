@@ -1,0 +1,9 @@
+title: ""
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: What would be better, and for whom.
+    validations:
+      required: true

@@ -1,0 +1,25 @@
+apiVersion: eca/v1
+kind: ExternalClientAppPlan
+metadata:
+  name: AuthProviderLogin
+  label: Auth Provider Login
+  description: Used by another Salesforce org to sign in to this one through an Authentication Provider.
+  contactEmail: admin@example.com
+  distributionState: Local
+  isProtected: false
+oauth:
+  flowType: web-server
+  callbackUrls:
+    - https://login.example.com/services/authcallback/provider
+  scopes:
+    - Api
+    - RefreshToken
+  isPkceRequired: true
+  isRefreshTokenRotationEnabled: true
+policies:
+  permittedUsersPolicyType: AdminApprovedPreAuthorized
+  ipRelaxationPolicyType: Enforce
+  requiredSessionLevel: STANDARD
+  refreshTokenPolicyType: SpecificLifetime
+  refreshTokenValidityPeriod: 30
+  refreshTokenValidityUnit: Days

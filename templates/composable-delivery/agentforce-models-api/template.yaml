@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "agentforce-models-api"
+  name: "Agentforce Models API Client"
+  version: "0.0.1"
+  platform:
+    name: "Agentforce Models API"
+    documentationUrl: "https://developer.salesforce.com/docs/ai/agentforce/guide/models-api-authentication.html"
+  category: "AI & Agents"
+  tags: ["agentforce", "models-api", "ai"]
+  summary: "For a server-side program that calls large language models through the Agentforce Models API, with no person present."
+  description: "Connects a backend program to the Agentforce Models API. Nobody signs in: the admin who deploys the app chooses the Salesforce user the program runs as, with --run-as."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "ModelsApiClient"
+    required: true
+    helpText: "API name for the External Client App in your org, for example ModelsApiClient."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Models API Client"
+    description: "Used by a server-side program to call the Agentforce Models API."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "client-credentials"
+    scopes:
+      - "Api"
+      - "SFApiPlatform"
+    isNamedUserJwtEnabled: true
+
+references:
+  - setting: "oauth.isNamedUserJwtEnabled"
+    url: "https://developer.salesforce.com/docs/ai/agentforce/guide/models-api-authentication.html"

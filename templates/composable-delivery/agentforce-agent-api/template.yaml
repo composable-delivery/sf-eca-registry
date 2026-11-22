@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://sf-cli-plugin-eca.vercel.app/schemas/eca-template.schema.json
+apiVersion: eca/v1
+kind: ExternalClientAppTemplate
+
+metadata:
+  id: "agentforce-agent-api"
+  name: "Agentforce Agent API Client"
+  version: "0.0.1"
+  platform:
+    name: "Agentforce Agent API"
+    documentationUrl: "https://developer.salesforce.com/docs/ai/agentforce/guide/agent-api-get-started.html"
+  category: "AI & Agents"
+  tags: ["agentforce", "agent-api", "ai"]
+  summary: "For a server-side program that talks to Agentforce agents through the Agent API, with no person present."
+  description: "Connects a backend program to the Agentforce Agent API. Nobody signs in: the admin who deploys the app chooses the Salesforce user the program runs as, with --run-as."
+
+parameters:
+  - id: "NAME"
+    label: "App API Name"
+    type: "string"
+    default: "AgentApiClient"
+    required: true
+    helpText: "API name for the External Client App in your org, for example AgentApiClient."
+    validationRegex: "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
+
+  - id: "ADMIN_EMAIL"
+    label: "Administrator Contact Email"
+    type: "email"
+    required: true
+    helpText: "Email address of the person responsible for this app."
+
+blueprint:
+  appMetadata:
+    name: "${NAME}"
+    label: "Agent API Client"
+    description: "Used by a server-side program to call the Agentforce Agent API."
+    contactEmail: "${ADMIN_EMAIL}"
+  oauth:
+    flowType: "client-credentials"
+    scopes:
+      - "Api"
+      - "Chatbot"
+      - "SFApiPlatform"
+    isNamedUserJwtEnabled: true
+
+references:
+  - setting: "oauth.isNamedUserJwtEnabled"
+    url: "https://developer.salesforce.com/docs/ai/agentforce/guide/agent-api-get-started.html"

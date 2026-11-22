@@ -1,0 +1,38 @@
+name: Request a publisher folder
+description: Ask the maintainers to add templates/<login>/ for a GitHub account.
+title: "Publisher: "
+labels: ["publisher-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A maintainer creates `templates/<login>/.publisher.yaml` from this request. Submitters cannot edit that file.
+  - type: input
+    id: login
+    attributes:
+      label: GitHub login or organization
+      description: The account that publishes. Its numeric id is recorded, so a rename is detected.
+      placeholder: example-org
+    validations:
+      required: true
+  - type: input
+    id: display-name
+    attributes:
+      label: Display name
+      description: The name shown beside the publisher's templates.
+    validations:
+      required: true
+  - type: textarea
+    id: submitters
+    attributes:
+      label: Who may submit
+      description: GitHub usernames, one per line, who may open pull requests for this folder.
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: What you plan to publish
+      description: The integrations the templates are for, and the platform each is documented by.
+    validations:
+      required: true

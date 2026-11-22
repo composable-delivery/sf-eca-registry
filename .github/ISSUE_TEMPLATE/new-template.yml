@@ -1,0 +1,64 @@
+name: Propose a template
+description: Describe a template before or alongside its pull request.
+title: "Template: "
+labels: ["template-submission"]
+body:
+  - type: input
+    id: publisher
+    attributes:
+      label: Publisher login
+      placeholder: example-org
+    validations:
+      required: true
+  - type: input
+    id: template-id
+    attributes:
+      label: Template id
+      description: A lower-case slug; it is the name of the template's folder.
+      placeholder: partner-portal
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform name
+      description: The product the template integrates with.
+    validations:
+      required: true
+  - type: input
+    id: documentation
+    attributes:
+      label: Platform documentation URL
+      description: An https link to the platform's own documentation for the integration.
+    validations:
+      required: true
+  - type: dropdown
+    id: flow
+    attributes:
+      label: OAuth flow
+      options:
+        - Authorization code (web server)
+        - JWT bearer
+        - Client credentials
+        - OIDC token exchange
+    validations:
+      required: true
+  - type: textarea
+    id: scopes
+    attributes:
+      label: Scopes
+      description: The OAuth scopes the template grants.
+    validations:
+      required: true
+  - type: textarea
+    id: non-default
+    attributes:
+      label: Why each non-default setting is needed
+      description: One line per setting that differs from the plugin's default, with the documentation that says so.
+    validations:
+      required: true
+  - type: input
+    id: pull-request
+    attributes:
+      label: Pull request
+      description: A link, if one is open.
