@@ -11,15 +11,17 @@ jobs:
   validate:
     permissions:
       contents: read
+      packages: read
       pull-requests: write
-    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/validate.yml@07ef599ec64c13460f5f8cc856010fbf14395ecd
+    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/validate.yml@2938e91bdef2d14a585b9b9391e8986d5895a188
     secrets: inherit
   scratch-deploy:
     permissions:
       contents: read
+      packages: read
       pull-requests: read
     if: github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name == 'approve-deploy'
-    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/scratch-deploy.yml@07ef599ec64c13460f5f8cc856010fbf14395ecd
+    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/scratch-deploy.yml@2938e91bdef2d14a585b9b9391e8986d5895a188
     secrets: inherit
   release:
     permissions:
@@ -28,12 +30,13 @@ jobs:
       id-token: write
       attestations: write
     if: startsWith(github.ref, 'refs/tags/v')
-    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/release.yml@07ef599ec64c13460f5f8cc856010fbf14395ecd
+    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/release.yml@2938e91bdef2d14a585b9b9391e8986d5895a188
     secrets: inherit
   site:
     permissions:
       contents: read
+      packages: read
       pages: write
       id-token: write
     if: github.event_name == 'push' && github.ref_type == 'branch'
-    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/site.yml@07ef599ec64c13460f5f8cc856010fbf14395ecd
+    uses: composable-delivery/sf-eca-registry-kit/.github/workflows/site.yml@2938e91bdef2d14a585b9b9391e8986d5895a188
